@@ -7,9 +7,10 @@ export interface Material {
   tipo: string;
   fechaCompra: string;
   ciudad: string;
-  precio: number;
+  descripcion: string;
+  precio: number | null;
   estado: string;
-  fechaVenta?: string;
+  fechaVenta?: string | null;
 }
 
 @Injectable({
@@ -55,7 +56,7 @@ export class MaterialService {
       headers: this.getAuthHeaders(),
     });
   }
-  updateMaterial(id: number, material: Material): Observable<Material> {
+  updateMaterial(id: number, material: any): Observable<Material> {
     return this.http.put<Material>(`${this.apiUrl}/${id}`, material, {
       headers: this.getAuthHeaders(),
     });

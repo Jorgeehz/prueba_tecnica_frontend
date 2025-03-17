@@ -5,8 +5,9 @@ import { MaterialsComponent } from './components/materials/materials.component';
 import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
+  {path: '', redirectTo: 'register', pathMatch: 'full'},
+  { path: 'register', component: RegisterComponent },
   { path: '', component: MaterialsComponent, canActivate: [AuthGuard] }, // Protegido
   { path: 'login', component: LoginComponent },
   { path: 'materiales', component: MaterialsComponent, canActivate: [AuthGuard] }, // Protegido
-  { path: 'register', component: RegisterComponent },
 ];

@@ -1,28 +1,30 @@
 <div class="flex flex-col  justify-center items-center h-screen  dark:bg-gray-800">
-  <form class=" flex  items-center gap-4 max-w-lg mx-auto mb-4">
-    <div class="flex mb-2">
-      <input type="text" placeholder="Search by type" #tipoInput class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
-      <button (click)="searchByTipo(tipoInput.value)" class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Search
+  <form class=" flex  items-center  gap-4 p-4  ">
+    <div class="flex mb-2  ">
+      <input type="text" placeholder="Buscar por tipo" #tipoInput class=" p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
+      <button (click)="searchByTipo(tipoInput.value)" class=" end-1 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Buscar
       </button>
-    </div>
+      </div>
+    
+    
   
-    <div class="flex mb-2">
-      <input type="date" #fechaInput class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
+    <div class="flex mb-2  ">
+      <input type="date" #fechaInput class=" p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
       <button (click)="searchByFechaCompra(fechaInput.value)" class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Search
+        Buscar
       </button>
     </div>
   
-    <div class="flex mb-2">
-      <input type="text" placeholder="Search by city" #ciudadInput class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
+    <div class="flex mb-2  ">
+      <input type="text" placeholder="Buscar por ciudad" #ciudadInput class=" p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-l-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" />
       <button (click)="searchByCiudad(ciudadInput.value)" class="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Search
+        Buscar
       </button>
     </div>
   </form>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-12">
-  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <table class=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
               <th scope="col" class="px-6 py-3">Nombre</th>
@@ -32,7 +34,7 @@
               <th scope="col" class="px-6 py-3">Fecha de Compra</th>
               <th scope="col" class="px-6 py-3">Estado</th>
               <th scope="col" class="px-6 py-3">Ciudad</th>
-              <th scope="col" class="px-6 py-3">Acciones</th>
+              <th scope="col" class="px-6 py-3 flex justify-center">Acciones</th>
           </tr>
       </thead>
       <tbody>
@@ -45,9 +47,10 @@
               <td class="px-6 py-4">${{ material.precio }}</td>
               <td class="px-6 py-4">{{ material.fechaCompra }}</td>
               <td class="px-6 py-4">{{ material.estado }}</td>
-              <td class="px-6 py-4">{{ material.ciudadCodigo }}</td>
-              <td class="px-6 py-4">
+              <td class="px-6 py-4">{{ material.ciudadNombre }}</td>
+              <td class="px-6 py-4 space-x-2">
                   <button (click)="deleteMaterial(material.id)" class="bg-red-500 text-white px-3 py-1 rounded">Eliminar</button>
+                  <button (click)="openEditForm(material)" class="bg-blue-500 text-white px-3 py-1 rounded">Editar</button>
               </td>
           </tr>
       </tbody>
@@ -59,58 +62,132 @@
   </button>
 </div>
 
-<div *ngIf="showForm" class="p-4 border rounded shadow-md bg-gray-100">
-  <form (ngSubmit)="addMaterial()" class="max-w-md mx-auto">
-    <div class="relative z-0 w-full mb-5 group">
-      <label class="block">Nombre:</label>
-      <input type="text" [(ngModel)]="newMaterial.nombre" name="nombre" required class="w-full p-2 border rounded">
+<div *ngIf="showForm" class=" p-4 border rounded shadow-md dark:bg-gray-800">
+  <form (ngSubmit)="addMaterial()" class="space-y-4 dark:bg-gray-800">
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+        <input type="text" id="nombre" [(ngModel)]="newMaterial.nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Material" required />
+      </div>
+  
+      <!-- Descripción -->
+      <div>
+        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+        <input type="text" id="descripcion" [(ngModel)]="newMaterial.descripcion" name="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Descripción del material" required />
+      </div>
+  
+      <!-- Tipo -->
+      <div>
+        <label for="tipo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
+        <input type="text" id="tipo" [(ngModel)]="newMaterial.tipo" name="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tipo del material" required />
+      </div>
+  
+      <!-- Precio -->
+      <div>
+        <label for="precio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+        <input type="number" id="precio" [(ngModel)]="newMaterial.precio" name="precio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Precio del material" required min="1" />
+      </div>
+  
+      <!-- Fecha de Compra -->
+      <div>
+        <label for="fechaCompra" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Compra</label>
+        <input type="date" id="fechaCompra" [(ngModel)]="newMaterial.fechaCompra" name="fechaCompra" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+      </div>
+  
+      <!-- Fecha de Venta -->
+      <div>
+        <label for="fechaVenta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Venta</label>
+        <input type="date" id="fechaVenta" [(ngModel)]="newMaterial.fechaVenta" name="fechaVenta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+      </div>
+  
+      <!-- Estado -->
+      <div>
+        <label for="estado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
+        <select id="estado" [(ngModel)]="newMaterial.estado" name="estado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+          <option value="ACTIVO">ACTIVO</option>
+          <option value="ASIGNADO">ASIGNADO</option>
+          <option value="DISPONIBLE">DISPONIBLE</option>
+        </select>
+      </div>
+  
+      <!-- Ciudad -->
+      <div>
+        <label for="ciudad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+        <input type="text" id="ciudad" [(ngModel)]="newMaterial.ciudadNombre" name="ciudadCodigo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad del material" required />
+      </div>
     </div>
-
-    <div class="mb-2">
-      <label class="block">Descripción:</label>
-      <input type="text" [(ngModel)]="newMaterial.descripcion" name="descripcion" required class="w-full p-2 border rounded">
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Tipo:</label>
-      <input type="text" [(ngModel)]="newMaterial.tipo" name="tipo" required class="w-full p-2 border rounded">
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Precio:</label>
-      <input type="number" [(ngModel)]="newMaterial.precio" name="precio" required min="1" class="w-full p-2 border rounded">
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Fecha de Compra:</label>
-      <input type="date" [(ngModel)]="newMaterial.fechaCompra" name="fechaCompra" required class="w-full p-2 border rounded">
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Fecha de Venta:</label>
-      <input type="date" [(ngModel)]="newMaterial.fechaVenta" name="fechaVenta" class="w-full p-2 border rounded">
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Estado:</label>
-      <select [(ngModel)]="newMaterial.estado" name="estado" required class="w-full p-2 border rounded">
-        <option value="ACTIVO">ACTIVO</option>
-        <option value="ASIGNADO">ASIGNADO</option>
-        <option value="DISPONIBLE">DISPONIBLE</option>
-      </select>
-    </div>
-
-    <div class="mb-2">
-      <label class="block">Ciudad:</label>
-      <input type="text" [(ngModel)]="newMaterial.ciudadCodigo" name="ciudadCodigo" required class="w-full p-2 border rounded">
-    </div>
-
-    <button type="button" (click)="addMaterial()" class="bg-green-500 text-white px-4 py-2 rounded">Guardar</button>
+  
+    <button type="button" (click)="addMaterial()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Guardar</button>
   </form>
+  
+</div>
+<div *ngIf="showEditForm" class=" p-4 border rounded shadow-md dark:bg-gray-800">
+  <form (ngSubmit)="editMaterial()" class="space-y-4 dark:bg-gray-800">
+    <div class="grid gap-6 mb-6 md:grid-cols-2">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
+        <input type="text" id="nombre" [(ngModel)]="EditMaterialData.nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Material" required />
+      </div>
+  
+      <!-- Descripción -->
+      <div>
+        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+        <input type="text" id="descripcion" [(ngModel)]="EditMaterialData.descripcion" name="descripcion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Descripción del material" required />
+      </div>
+  
+      <!-- Tipo -->
+      <div>
+        <label for="tipo" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo</label>
+        <input type="text" id="tipo" [(ngModel)]="EditMaterialData.tipo" name="tipo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tipo del material" required />
+      </div>
+  
+      <!-- Precio -->
+      <div>
+        <label for="precio" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio</label>
+        <input type="number" id="precio" [(ngModel)]="EditMaterialData.precio" name="precio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Precio del material" required min="1" />
+      </div>
+  
+      <!-- Fecha de Compra -->
+      <div>
+        <label for="fechaCompra" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Compra</label>
+        <input type="date" id="fechaCompra" [(ngModel)]="EditMaterialData.fechaCompra" name="fechaCompra" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+      </div>
+  
+      <!-- Fecha de Venta -->
+      <div>
+        <label for="fechaVenta" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fecha de Venta</label>
+        <input type="date" id="fechaVenta" [(ngModel)]="EditMaterialData.fechaVenta" name="fechaVenta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+      </div>
+  
+      <!-- Estado -->
+      <div>
+        <label for="estado" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estado</label>
+        <select id="estado" [(ngModel)]="EditMaterialData.estado" name="estado" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+          <option value="ACTIVO">ACTIVO</option>
+          <option value="ASIGNADO">ASIGNADO</option>
+          <option value="DISPONIBLE">DISPONIBLE</option>
+        </select>
+      </div>
+  
+      <!-- Ciudad -->
+      <div>
+        <label for="ciudad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ciudad</label>
+        <input type="text" id="ciudad" [(ngModel)]="EditMaterialData.ciudadNombre" name="ciudadNombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ciudad del material" required />
+      </div>
+    </div>
+  
+    <button type="button" (click)="editMaterial()" class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Actualizar</button>
+  </form>
+  <div class="flex justify-end mb-4">
+    <button (click)="showEditForm = false" class="bg-blue-500 text-white px-4 py-2 rounded">
+      Cerrar
+    </button>
+  </div>
 </div>
 
-
-<button (click)="logout()" class="bg-red-500
+<button (click)="logout()" class="mt-9 bg-red-500
 text-white px-4 py-2 rounded">Cerrar Sesión</button>
 
 </div>
