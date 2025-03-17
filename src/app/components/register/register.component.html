@@ -1,0 +1,38 @@
+<div class="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800">
+  
+    <div class="bg-white p-6 rounded-lg shadow-md w-96">
+      <h2 class="text-2xl font-bold mb-4 text-center">Registro</h2>
+  
+      <input
+        type="email"
+        placeholder="Correo electrónico"
+        [(ngModel)]="email"
+        class="w-full px-4 py-2 border rounded-lg mb-2"
+      />
+  
+      <input
+        type="password"
+        placeholder="Contraseña"
+        [(ngModel)]="password"
+        class="w-full px-4 py-2 border rounded-lg mb-4"
+      />
+  
+      <button
+        (click)="register()"
+        class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 cursor-pointer"
+      >
+        Registrarse
+      </button>
+      
+      <p class=" mt-10 flex flex-col justify-center items-center">¿Ya tienes una cuenta? 
+        <a href="/login" class="w-full  flex justify-center text-white py-2 rounded-lg bg-blue-500 hover:bg-blue-600">
+          Inicia sesión aquí</a>
+      </p>
+      
+      <p class="text-red-500 text-center mt-2" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+    </div>
+  </div>
+  
+  

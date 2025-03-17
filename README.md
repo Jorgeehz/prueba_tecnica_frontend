@@ -1,59 +1,42 @@
-# PruebaTecnicaFrontend
+# Proyecto Angular - Gestión de Materiales
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.7.
+## Descripción
+Este proyecto es una aplicación web frontend desarrollada con **Angular 19** y **TailwindCSS** para visualizar y gestionar la información de materiales. Se conecta a una API RESTful construida con **Spring Boot**, la cual maneja la información de materiales, incluyendo creación, actualización y búsqueda de materiales.
 
-## Development server
+## Tecnologías utilizadas:
+- **Angular 19**: Framework frontend para la construcción de la SPA.
+- **TailwindCSS**: Framework CSS para un diseño de interfaz rápido y responsivo.
+- **Flowbite**: Biblioteca de componentes de interfaz de usuario basada en TailwindCSS.
 
-To start a local development server, run:
+## Características:
+- Visualización de materiales.
+- Formulario de registro de nuevos materiales con validaciones de campos.
+- Conexión directa con los endpoints del backend.
+- UI sencilla y responsiva con TailwindCSS.
+- Implementación de rutas internas para una navegación fluida.
+- Manejo de errores y validaciones para el formulario de entrada de materiales.
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Requisitos:
+- **Node.js** versión 18.x o superior
+- **Angular CLI** versión 15.x o superior
 
-## Code scaffolding
+## Instalación:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clona este repositorio:
 
-```bash
-ng generate component component-name
-```
+    git clone https://github.com/Jorgeehz/prueba_tecnica_front.git
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+2. Navega a la carpeta del proyecto:
 
-```bash
-ng generate --help
-```
+    cd prueba_tecnica_front
 
-## Building
+3. Instala dependencias:
 
-To build the project run:
+    npm install
 
-```bash
-ng build
-```
+4. Inicia la aplicación:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+    ng serve
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+   
