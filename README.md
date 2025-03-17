@@ -25,11 +25,11 @@ Este proyecto es una aplicación web frontend desarrollada con **Angular 19** y 
 
 1. Clona este repositorio:
 
-    git clone https://github.com/Jorgeehz/prueba_tecnica_front.git
+    git clone https://github.com/Jorgeehz/prueba_tecnica_frontend.git
 
 2. Navega a la carpeta del proyecto:
 
-    cd prueba_tecnica_front
+    cd prueba_tecnica_frontend
 
 3. Instala dependencias:
 
